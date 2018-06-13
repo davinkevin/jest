@@ -1,0 +1,9 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add Jest as default test system",
+      "factory": "./ng-add/index#ngAdd"
+    }
+  }
+}
