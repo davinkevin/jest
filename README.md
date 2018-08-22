@@ -7,3 +7,6 @@ $ ng add @davinkevin/jest
 ```
 
 All modification / setup will be done and you can run your tests with the command `yarn test` for single run and `yarn test:watch` for interactive mode
+Those command can also be ran by `npm`, with `npm run test` or `npm run test:watch`
+
+Further modification will bring the `ng test` method 
