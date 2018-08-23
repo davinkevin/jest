@@ -127,6 +127,7 @@ function editTsConfigSpecJson() {
 
         tsConfigJson['compilerOptions'] = {
             ...tsConfigJson['compilerOptions'],
+            ['module']: "commonjs",
             ['allowJs']: true,
             ['baseUrl']: './',
         };
