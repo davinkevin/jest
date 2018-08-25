@@ -10,7 +10,7 @@
   "keywords": [
     "schematics"
   ],
-  "author": "",
+  "author": "davinkevin",
   "license": "MIT",
   "schematics": "./src/collection.json",
   "dependencies": {
