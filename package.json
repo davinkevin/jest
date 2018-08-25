@@ -1,6 +1,6 @@
 {
   "name": "@davinkevin/jest",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Angular Schematics which add Jest to your original setup",
   "scripts": {
     "build": "tsc -p tsconfig.json",

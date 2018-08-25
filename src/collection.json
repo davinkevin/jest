@@ -3,7 +3,7 @@
   "schematics": {
     "ng-add": {
       "description": "Add Jest as default test system",
-      "factory": "./ng-add/index#ngAdd"
+      "factory": "./schematics/ng-add/index#ngAdd"
     }
   }
 }
