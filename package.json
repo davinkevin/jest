@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && jasmine **/*_spec.js",
-    "prepublish": "tsc -p tsconfig.json"
+    "prepare": "tsc -p tsconfig.json"
   },
   "keywords": [
     "schematics"
