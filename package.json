@@ -1,6 +1,6 @@
 {
   "name": "@davinkevin/jest",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Angular Schematics which add Jest to your original setup",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -13,11 +13,16 @@
   "author": "davinkevin",
   "license": "MIT",
   "schematics": "./src/collection.json",
+  "builders": "./src/builders.json",
   "dependencies": {
-    "@angular-devkit/core": "^0.4.3",
-    "@angular-devkit/schematics": "^0.4.3",
+    "@angular-builders/jest": "1.1.1",
+    "@angular-devkit/core": "^0.7.0",
+    "@angular-devkit/schematics": "^0.7.0",
+    "@angular-devkit/architect": "^0.7.0",
     "@types/jasmine": "^2.6.0",
-    "@types/node": "^8.0.31",
+    "@types/node": "^8.0.31"
+  },
+  "devDependencies": {
     "jasmine": "^2.8.0",
     "typescript": "^2.5.2"
   }
