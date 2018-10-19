@@ -15,7 +15,7 @@ import {NodePackageInstallTask} from "@angular-devkit/schematics/tasks";
 // per file.
 export function ngAdd(_: any): Rule {
     return chain([
-        addScriptsToPackageJson("test", "jest --runInBand --ci --silent",),
+        editAngularJson(),
         addScriptsToPackageJson("test:watch", "jest --watch",),
         addPackageToPackageJson("devDependencies", "@types/jest", "^22.2.0"),
         addPackageToPackageJson("devDependencies", "jest", "^22.4.2"),
@@ -44,6 +44,7 @@ function runNpmPackageInstall() {
 }
 
 const PACKAGE_JSON = 'package.json';
+const ANGULAR_JSON = 'angular.json';
 const TSCONFIG_SPEC_JSON = 'src/tsconfig.spec.json';
 
 function addPackageToPackageJson(type: string, pkg: string, version: string): Rule {
@@ -67,28 +68,7 @@ function addPackageToPackageJson(type: string, pkg: string, version: string): Ru
         return host;
     }
 }
-/*
-function removePackageToPackageJson(type: string, pkg: string): Rule {
-    return (host: Tree, _: SchematicContext) => {
-        if (!host.exists(PACKAGE_JSON)) {
-            return host;
-        }
 
-        const sourceText = host.read(PACKAGE_JSON)!.toString('utf-8');
-        const json = JSON.parse(sourceText);
-
-        if (!json[type]) {
-            return host;
-        }
-
-        delete json[type][pkg];
-
-        host.overwrite(PACKAGE_JSON, JSON.stringify(json, null, 2));
-
-        return host;
-    }
-}
-*/
 function addScriptsToPackageJson(key: string, command: string) {
     return (host: Tree, _: SchematicContext) => {
         if (!host.exists(PACKAGE_JSON)) {
@@ -112,6 +92,29 @@ function addScriptsToPackageJson(key: string, command: string) {
         return host;
     }
 }
+
+function editAngularJson() {
+    return (host: Tree, _: SchematicContext) => {
+        if (!host.exists(ANGULAR_JSON)) {
+            return host;
+        }
+
+        const sourceText = host.read(ANGULAR_JSON)!.toString('utf-8');
+        const angularJson = JSON.parse(sourceText);
+        const builder = '@davinkevin/jest:test';
+
+        Object
+            .entries(angularJson['projects'])
+            .forEach(([_, p]: [string, any]) => {
+                try {p['architect']['test']['builder'] = builder;} catch (e) {}
+            });
+
+        host.overwrite(ANGULAR_JSON, JSON.stringify(angularJson, null, 2));
+
+        return host;
+    }
+}
+
 function editTsConfigSpecJson() {
     return (host: Tree, _: SchematicContext) => {
         if (!host.exists(TSCONFIG_SPEC_JSON)) {
